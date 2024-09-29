@@ -1,7 +1,7 @@
 <template>
-  <div class="goods-item">
-    <!-- <img :src="goodsItem.show.img" alt=""> -->
-    <img :src="testSrc" alt="">
+  <div class="goods-item" @click="itemClick">
+    <!-- <img :src="goodsItem.show.img" alt="" @load="imageLoad"> -->
+    <img :src="testSrc" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ goodsItem.price }}</span>
@@ -24,6 +24,16 @@ export default {
   data () {
     return {
       testSrc: require('../../../assets/img/common/collect.svg')
+    }
+  },
+  methods: {
+    imageLoad () {
+      // console.log(444)
+      this.$bus.$emit('itemImageLoad')
+    },
+    itemClick () {
+      // console.log(this.goodsItem)
+      this.$router.push('/detail/' + this.goodsItem.iid)
     }
   }
 }
